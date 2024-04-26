@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import io.github.vantiv.sdk.generate.ActivateReversal;
 import io.github.vantiv.sdk.generate.ActivateReversalResponse;
 import io.github.vantiv.sdk.generate.GiftCardCardType;
@@ -37,7 +40,8 @@ public class TestActivateReversal {
         activateReversal.setCard(giftCard);
         activateReversal.setOriginalRefCode("ref");
         activateReversal.setOriginalAmount(44455L);
-        activateReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        activateReversal.setOriginalTxnTime(timestamp);
         activateReversal.setOriginalSystemTraceId(0);
         activateReversal.setOriginalSequenceNumber("333333");
 

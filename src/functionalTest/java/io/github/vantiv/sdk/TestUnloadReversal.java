@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import io.github.vantiv.sdk.generate.GiftCardCardType;
 import io.github.vantiv.sdk.generate.MethodOfPaymentTypeEnum;
 import io.github.vantiv.sdk.generate.UnloadReversal;
@@ -39,7 +42,8 @@ public class TestUnloadReversal {
         unloadReversal.setCard(giftCard);
         unloadReversal.setOriginalRefCode("ref");
         unloadReversal.setOriginalAmount(44455l);
-        unloadReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        unloadReversal.setOriginalTxnTime(timestamp);
         unloadReversal.setOriginalSystemTraceId(0);
         unloadReversal.setOriginalSequenceNumber("333333");
 

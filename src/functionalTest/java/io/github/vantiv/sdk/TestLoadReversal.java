@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import io.github.vantiv.sdk.generate.GiftCardCardType;
 import io.github.vantiv.sdk.generate.LoadReversal;
 import io.github.vantiv.sdk.generate.LoadReversalResponse;
@@ -39,7 +42,8 @@ public class TestLoadReversal {
         loadReversal.setCard(giftCard);
         loadReversal.setOriginalRefCode("ref");
         loadReversal.setOriginalAmount(44455L);
-        loadReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        loadReversal.setOriginalTxnTime(timestamp);
         loadReversal.setOriginalSystemTraceId(0);
         loadReversal.setOriginalSequenceNumber("333333");
 
