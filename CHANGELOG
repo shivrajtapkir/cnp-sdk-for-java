@@ -1,5 +1,8 @@
 = Vantiv eCommerce CNP CHANGELOG
 
+==(Mar 30, 2024)
+* Change: cnp-sdk-for-java is upgraded to work with Java 17.
+
 ==Version 12.34.0 (v12.34)(Feb 15, 2024)
 * Change: [cnpAPI v12.34] For existing simple element 'amount' simple type is changed from 'transactionAmountType' to 'achTransactionAmountType' in transactions- vendorCredit,vendorDebit,submerchantCredit,submerchantDebit,payFacDebit,payFacCredit,reserveCredit,reserveDebit
 * Change: [cnpAPI v12.34] Added new simple type 'achTransactionAmountType' to support 'amount'.
