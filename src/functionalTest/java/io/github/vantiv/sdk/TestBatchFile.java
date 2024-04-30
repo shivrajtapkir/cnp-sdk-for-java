@@ -16,6 +16,9 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 import io.github.vantiv.sdk.generate.*;
 import org.junit.Assume;
@@ -1429,7 +1432,7 @@ public class TestBatchFile {
     }
 
     @Test
-    public void testGiftCardTransactions() {
+    public void testGiftCardTransactions() throws DatatypeConfigurationException {
 
        Assume.assumeFalse(preliveStatus.equalsIgnoreCase("down"));
         
@@ -1511,7 +1514,8 @@ public class TestBatchFile {
         gcAuthReversal.setReportGroup("rptGrp2");
         gcAuthReversal.setOriginalAmount(45l);
         gcAuthReversal.setOriginalSequenceNumber("333333");
-        gcAuthReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        gcAuthReversal.setOriginalTxnTime(timestamp);
         gcAuthReversal.setOriginalSystemTraceId(0);
         gcAuthReversal.setOriginalRefCode("ref");
         gcAuthReversal.setCard(giftCard);
@@ -1525,7 +1529,7 @@ public class TestBatchFile {
         gcCapture.setCard(giftCard);
         gcCapture.setOriginalRefCode("ref");
         gcCapture.setOriginalAmount(44455l);
-        gcCapture.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        gcCapture.setOriginalTxnTime(timestamp);
         batch.addTransaction(gcCapture);
 
         GiftCardCredit gcCredit = new GiftCardCredit();
