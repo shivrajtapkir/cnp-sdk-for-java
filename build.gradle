@@ -1,5 +1,6 @@
 apply plugin : 'eclipse'
 apply plugin : 'java'
+apply plugin : 'java-library'
 apply plugin : 'jacoco'
 apply plugin : 'maven-publish'
 
@@ -13,6 +14,13 @@ repositories {
 }
 
 configurations {
+    all{
+        resolutionStrategy {
+            force "com.sun.xml.bind:jaxb-xjc:2.3.5"
+            force "com.sun.xml.bind:jaxb-core:2.3.0"
+
+        }
+    }
     functionalTestImplementation.extendsFrom testImplementation
     functionalTestRuntimeOnly.extendsFrom runtimeOnly
     
@@ -57,9 +65,12 @@ dependencies{
     testImplementation group: 'org.mockito', name: 'mockito-core', version: '4.11.0'
     testImplementation 'org.slf4j:slf4j-nop:1.7.36'
 
-    generateJAXB group:'com.sun.xml.bind', name:'jaxb-core', version:'2.2.7'
-    generateJAXB group:'com.sun.xml.bind', name:'jaxb-impl', version:'2.2.5-5'
-    generateJAXB group:'com.sun.xml.bind', name:'jaxb-xjc', version:'2.2.5'
+    implementation "javax.xml.bind:jaxb-api:2.3.1"
+
+    generateJAXB group:'com.sun.xml.bind', name:'jaxb-core', version:'2.3.0'
+    generateJAXB group:'com.sun.xml.bind', name:'jaxb-impl', version:'2.3.4'
+    generateJAXB group:'com.sun.xml.bind', name:'jaxb-xjc', version:'2.3.5'
+
 }
 
 ////////// PLUGIN CONFIGURATION ////////// 

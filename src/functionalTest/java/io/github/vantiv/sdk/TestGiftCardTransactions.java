@@ -4,6 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,7 +32,7 @@ public class TestGiftCardTransactions {
 	}
 	
 	@Test
-	public void testGiftCardCapture() {
+	public void testGiftCardCapture() throws DatatypeConfigurationException {
 		GiftCardCapture gcCapture = new GiftCardCapture();
         GiftCardCardType giftCard = new GiftCardCardType();
         giftCard.setType(MethodOfPaymentTypeEnum.GC);
@@ -44,7 +48,8 @@ public class TestGiftCardTransactions {
         gcCapture.setCard(giftCard);
         gcCapture.setOriginalRefCode("ref");
         gcCapture.setOriginalAmount(44455l);
-        gcCapture.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        gcCapture.setOriginalTxnTime(timestamp);
         
         GiftCardCaptureResponse response = cnp.giftCardCapture(gcCapture);
         assertEquals("Approved", response.getMessage());
@@ -98,7 +103,7 @@ public class TestGiftCardTransactions {
 	}
 	
 	@Test
-	public void testGiftCardAuthReversal() {
+	public void testGiftCardAuthReversal() throws DatatypeConfigurationException {
 		GiftCardAuthReversal gcAuthReversal = new GiftCardAuthReversal();
 		GiftCardCardType giftCard = new GiftCardCardType();
         giftCard.setType(MethodOfPaymentTypeEnum.GC);
@@ -113,7 +118,8 @@ public class TestGiftCardTransactions {
         gcAuthReversal.setReportGroup("rptGrp2");
         gcAuthReversal.setOriginalAmount(45l);
         gcAuthReversal.setOriginalSequenceNumber("333333");
-        gcAuthReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        gcAuthReversal.setOriginalTxnTime(timestamp);
         gcAuthReversal.setOriginalSystemTraceId(0);
         gcAuthReversal.setOriginalRefCode("ref");
         gcAuthReversal.setCard(giftCard);

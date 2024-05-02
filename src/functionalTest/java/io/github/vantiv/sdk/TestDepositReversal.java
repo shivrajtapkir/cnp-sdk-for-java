@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.GregorianCalendar;
 
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.XMLGregorianCalendar;
+
 import io.github.vantiv.sdk.generate.DepositReversal;
 import io.github.vantiv.sdk.generate.DepositReversalResponse;
 import io.github.vantiv.sdk.generate.GiftCardCardType;
@@ -40,7 +43,8 @@ public class TestDepositReversal {
         depositReversal.setCard(giftCard);
         depositReversal.setOriginalRefCode("ref");
         depositReversal.setOriginalAmount(44455L);
-        depositReversal.setOriginalTxnTime(new XMLGregorianCalendarImpl(new GregorianCalendar()));
+        XMLGregorianCalendar timestamp = DatatypeFactory.newInstance().newXMLGregorianCalendar(new GregorianCalendar());
+        depositReversal.setOriginalTxnTime(timestamp);
         depositReversal.setOriginalSystemTraceId(0);
         depositReversal.setOriginalSequenceNumber("333333");
 
